@@ -3,6 +3,9 @@ import dotenv from "dotenv";
 import cors from "cors";
 import authRoutes from "./routes/auth.route.js"
 import connectDB from "./config/db.js";
+import doctorRoutes from "./routes/doctor.route.js";
+import patientRoutes from "./routes/patient.route.js";
+import { doctorProtect, patientProtect } from "./middleware/auth.middleware.js";
 
 dotenv.config();
 connectDB();
@@ -19,7 +22,8 @@ app.use((req, res, next) => {
 
 
 app.use("/api/auth", authRoutes);
-
+app.use("/api/doctor", doctorProtect, doctorRoutes);
+app.use("/api/patient", patientProtect, patientRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
