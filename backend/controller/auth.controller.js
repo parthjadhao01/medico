@@ -62,15 +62,15 @@ export async function patientRegistration(req, res) {
 export async function patientLogin(req, res) {
     try {
         const { email, password } = req.body;
-        const doctor = await Doctor.findOne({ email });
-        if (!doctor) {
+        const patient = await Patient.findOne({ email });
+        if (!patient) {
             return res.status(400).send("Invalid credentials");
         }
-        const isPasswordValid = await bcrypt.compare(password, doctor.password);
+        const isPasswordValid = await bcrypt.compare(password, patient.password);
         if (!isPasswordValid) {
             return res.status(400).send("Invalid credentials");
         }
-        res.send({ message: "Patient logged in", token: generateJWTToken(doctor._id) });
+        res.send({ message: "Patient logged in", token: generateJWTToken(patient._id) });
     } catch (error) {
         console.error(error)
         res.status(500).send("Internal server error")

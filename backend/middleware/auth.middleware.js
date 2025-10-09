@@ -42,7 +42,7 @@ export const patientProtect = async (req, res, next) => {
       console.log("Patient not found for decoded ID:", decoded.id);
       return res.status(401).json({ message: "Not authorized, patient not found" });
     }
-
+    console.log("patient is found : ",patient)
     req.user = patient;
     next();
   } catch (error) {

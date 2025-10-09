@@ -6,6 +6,7 @@ import connectDB from "./config/db.js";
 import doctorRoutes from "./routes/doctor.route.js";
 import patientRoutes from "./routes/patient.route.js";
 import { doctorProtect, patientProtect } from "./middleware/auth.middleware.js";
+import appointmentRoutes  from "./routes/appointment.route.js";
 
 dotenv.config();
 connectDB();
@@ -24,6 +25,7 @@ app.use((req, res, next) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/doctor", doctorProtect, doctorRoutes);
 app.use("/api/patient", patientProtect, patientRoutes);
+app.use("/api/appointments", appointmentRoutes); 
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

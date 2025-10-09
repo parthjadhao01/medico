@@ -1,28 +1,15 @@
 import mongoose from "mongoose";
 
 const availableSlotSchema = new mongoose.Schema({
-    start: {
-        type: Date,
-        required: true,
-    },
-    end: {
-        type: Date,
-        required: true,
-    },
+    start: { type: String, required: true }, // store "10:00"
+    end: { type: String, required: true },
     day: {
         type: String,
-        enum: [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday",
-        ],
+        enum: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
         required: true,
     },
 });
+
 
 const doctorSchema = new mongoose.Schema({
     email: {
@@ -30,8 +17,8 @@ const doctorSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    password : {
-        type : String
+    password: {
+        type: String
     },
     name: {
         type: String,
